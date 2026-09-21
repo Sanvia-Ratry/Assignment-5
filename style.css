@@ -1,0 +1,18 @@
+* {
+  font-family: "Geist", sans-serif;
+}
+body {
+  background-color: #f8fafc;
+}
+#login-container {
+  background-color: white;
+}
+/*---- login page ---*/
+
+.light-color {
+  color: #64748b;
+}
+.bg-primary {
+  background-color: #4a00ff;
+  color: white;
+}
