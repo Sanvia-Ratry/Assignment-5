@@ -10,9 +10,38 @@ body {
 /*---- login page ---*/
 
 .light-color {
-  color: #64748b;
+  color: #64748bac;
 }
-.bg-primary {
+.bg-primary,
+.activeTab {
   background-color: #4a00ff;
   color: white;
+}
+.activeBtn {
+  background-color: #4a00ff;
+  color: white;
+  padding: 8px 12px;
+  text-align: center;
+  border-radius: 4px;
+  width: 120px;
+}
+.btn {
+  border: 1px solid #64748b;
+  color: #64748b;
+  padding: 8px 12px;
+  text-align: center;
+  border-radius: 4px;
+  width: 120px;
+}
+.primary-highlight {
+  background-color: #feecec;
+  color: #ef4444;
+}
+.secondary-highlight {
+  color: #d97706;
+  background-color: #fde68a;
+}
+.low-highlight {
+  background-color: #eeeff2;
+  color: #9ca3af;
 }
