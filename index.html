@@ -22,13 +22,19 @@
           <h1 class="text-2xl font-semibold">GitHub Issues Tracker</h1>
         </div>
         <div class="flex gap-4">
-          <input
-            type="text"
-            id="search-input"
-            placeholder="        Search Issues..."
-            class="border border-blue-100 rounded relative"
-          /><i class="fa-solid fa-magnifying-glass absolute mt-3 ml-2"></i>
-          <button class="text-white bg-[#4a00ff] text-center rounded px-3 py-2">
+          <div
+            class="flex items-center gap-2 border border-blue-200 rounded px-2 py-1.5 bg-white focus-within:border-gray-400"
+          >
+            <i class="fa-solid fa-magnifying-glass text-slate-400"></i>
+
+            <input
+              type="text"
+              id="search-input"
+              placeholder="   Search Issues..."
+              class="outline-none border-none"
+            />
+          </div>
+          <button id="search-btn" class="text-white bg-[#4a00ff] text-center rounded px-3 py-2">
             <i class="fa-solid fa-plus"></i> New Issue
           </button>
         </div>

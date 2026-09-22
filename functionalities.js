@@ -10,10 +10,28 @@ const all_data_url = "https://phi-lab-server.vercel.app/api/v1/lab/issues";
 const getAllData = () => {
   fetch(all_data_url)
     .then((res) => res.json())
-    .then((obj) => dynamic_btn(obj));
+    .then((obj) => {
+      dynamic_btn(obj);
+    });
 };
-
 getAllData();
+
+function searchFunc(object) {
+  const searchBox = document.getElementById("search-input");
+  const searchValue = searchBox.value.toLowerCase().trim();
+  const cardContainer = document.getElementById("card-container");
+  if (cardContainer) {
+    cardContainer.innerHTML = "";
+  }
+  let count = 0;
+  object.data.forEach((item) => {
+    if (item.title.toLowerCase().includes(searchValue)) {
+      showItem(item);
+      count += 1;
+    }
+  });
+  updateCount(count);
+}
 const Show_all_data = (obj, allBtn, openBtn, closeBtn) => {
   openBtn.classList.add("btn");
   openBtn.classList.remove("activeBtn");
@@ -65,7 +83,7 @@ const updateCount = (count) => {
 const showItem = (card) => {
   const cardContainer = document.getElementById("card-container");
 
-  const newCard = `${card.priority === "low" ? `<div class="flex flex-col border-t-4  border-t-purple-500 shadow-md rounded-xl font-medium w-full bg-white">` : `<div class="flex flex-col border-t-4  border-t-[#00A96E] shadow-md rounded-xl font-medium w-full bg-white">`}
+  const newCard = `${card.status === "closed" ? `<div class="flex flex-col border-t-4  border-t-purple-500 shadow-md rounded-xl font-medium w-full bg-white">` : `<div class="flex flex-col border-t-4  border-t-[#00A96E] shadow-md rounded-xl font-medium w-full bg-white">`}
       
 
         <div class="p-4 space-y-[8px]">
@@ -146,6 +164,8 @@ const dynamic_btn = (obj) => {
 
   showTab(obj);
   Show_all_data(obj, allBtn, openBtn, closeBtn);
+  const searchBtn = document.getElementById("search-btn");
+  searchBtn.addEventListener("click", () => searchFunc(obj));
 };
 
 const show_selective_data = (s, obj, openBtn, closeBtn, allBtn) => {
