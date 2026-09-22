@@ -4,6 +4,9 @@
 body {
   background-color: #f8fafc;
 }
+header {
+  background-color: white;
+}
 #login-container {
   background-color: white;
 }

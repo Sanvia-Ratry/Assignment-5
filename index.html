@@ -15,9 +15,37 @@
     <script src="https://kit.fontawesome.com/2546e45b45.js" crossorigin="anonymous"></script>
   </head>
   <body>
-    <h2>Welcome, user!</h2>
-    <section id="btn-container" class="flex justify-baseline gap-x-4 p-6"></section>
-    <section id="card-container" class="grid grid-cols-4 gap-4" class="mx-4"></section>
+    <header class="px-20 py-4">
+      <div class="flex justify-between items-center">
+        <div class="flex gap-1">
+          <img class="w-[36px] h-[37px]" src="./assets/github-logo.png" />
+          <h1 class="text-2xl font-semibold">GitHub Issues Tracker</h1>
+        </div>
+        <div class="flex gap-4">
+          <input
+            type="text"
+            id="search-input"
+            placeholder="        Search Issues..."
+            class="border border-blue-100 rounded relative"
+          /><i class="fa-solid fa-magnifying-glass absolute mt-3 ml-2"></i>
+          <button class="text-white bg-[#4a00ff] text-center rounded px-3 py-2">
+            <i class="fa-solid fa-plus"></i> New Issue
+          </button>
+        </div>
+      </div>
+    </header>
+    <main class="max-w-[70%] mx-auto py-14">
+      <section
+        id="btn-container"
+        class="flex justify-baseline gap-x-4 p-6 bg-white mb-4 rounded-lg"
+      ></section>
+      <section id="card-section" class="border-transparent shadow-sm rounded-lg">
+        <div
+          id="card-container"
+          class="grid grid-cols-4 gap-4 p-6 border-t border-t-slate-300"
+        ></div>
+      </section>
+    </main>
   </body>
   <script src="./functionalities.js"></script>
 </html>
