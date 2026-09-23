@@ -55,6 +55,56 @@
         ></div>
       </section>
     </main>
+    <div id="detail-modal" class="fixed inset-0 z-50 items-center justify-center p-4 hidden">
+      <div class="absolute inset-0 bg-black/60 backdrop-blur-[1px]"></div>
+      <div
+        id="card-modal"
+        class="relative z-10 flex flex-col gap-3 border border-transparent w-fit min-w-[300px] max-w-[350px] min-h-[300px] rounded-lg shadow-md p-4 bg-white"
+      >
+        <div id="card-title" class="font-bold">Fix navigation menu on mobile devices</div>
+
+        <div class="flex flex-row gap-2 text-sm">
+          <button
+            id="status"
+            class="border border-transparent p-1 bg-green-200 rounded-full text-green-500"
+          ></button>
+          <h1 class="light-color flex items-center gap-1">
+            <span class="inline-block h-2 w-2 bg-gray-400 border border-none rounded-full"></span
+            >Opened by <span id="author" class="text-gray-700">name</span>
+          </h1>
+          <p class="light-color flex items-center gap-1">
+            <span class="inline-block h-2 w-2 bg-gray-400 border border-none rounded-full"></span
+            ><span id="date"></span>
+          </p>
+        </div>
+        <div>
+          <button
+            id="badge-1"
+            class="border border-transparent px-1 bg-yellow-400 rounded-full text-black"
+          ></button>
+          <button
+            id="badge-2"
+            class="border border-transparent px-1 bg-yellow-400 rounded-full text-black"
+          ></button>
+        </div>
+        <div>
+          <p id="card-des"></p>
+        </div>
+        <div class="p-2 flex justify-between border border-transparent rounded-lg bg-[#f8fafc]">
+          <div>
+            <h1 class="light-color">Assignee:</h1>
+            <p id="assign-name">Name..</p>
+          </div>
+          <div>
+            <h4>Priority:</h4>
+            <button id="priority" class="px-2 border border-transparent rounded-full">High</button>
+          </div>
+        </div>
+        <div class="flex justify-end">
+          <button onclick="closeModal()" class="activeBtn !w-15">Close</button>
+        </div>
+      </div>
+    </div>
   </body>
   <script src="./functionalities.js"></script>
 </html>

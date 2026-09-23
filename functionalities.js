@@ -3,7 +3,7 @@ console.log("testing js.....");
 if (sessionStorage.getItem("isAuthenticated") !== "true") {
   window.location.replace("login.html");
 }
-
+let allData = null;
 // loading all Data...
 const all_data_url = "https://phi-lab-server.vercel.app/api/v1/lab/issues";
 
@@ -11,6 +11,7 @@ const getAllData = () => {
   fetch(all_data_url)
     .then((res) => res.json())
     .then((obj) => {
+      allData = obj;
       dynamic_btn(obj);
     });
 };
@@ -42,6 +43,7 @@ const Show_all_data = (obj, allBtn, openBtn, closeBtn) => {
   allBtn.classList.remove("btn");
   const total = obj.data;
   updateCount(total.length);
+  document.getElementById("card-container").innerHTML = "";
   obj.data.forEach((item) => {
     showItem(item);
   });
@@ -80,10 +82,75 @@ const updateCount = (count) => {
   const counterId = document.getElementById("count");
   counterId.innerText = count;
 };
+const openDetailModal = (id) => {
+  if (!allData || !allData.data) return;
+  const modal = document.getElementById("detail-modal");
+  if (modal) {
+    modal.classList.remove("hidden");
+    modal.classList.add("flex");
+  }
+  const title = document.getElementById("card-title");
+  const statuss = document.getElementById("status");
+  const badge1 = document.getElementById("badge-1");
+  const badge2 = document.getElementById("badge-2");
+  const description = document.getElementById("card-des");
+  const assignee = document.getElementById("assign-name");
+  const priority = document.getElementById("priority");
+  const create_date = document.getElementById("date");
+  const author = document.getElementById("author");
+
+  if (allData.data[id - 1].author) {
+    author.innerText = allData.data[id - 1].author;
+  }
+  if (allData.data[id - 1].labels[0]) {
+    badge1.innerText = allData.data[id - 1].labels[0];
+    badge1.classList.remove("hidden");
+  } else {
+    badge1.classList.add("hidden");
+  }
+
+  if (allData.data[id - 1].labels[1]) {
+    badge2.innerText = allData.data[id - 1].labels[1];
+    badge2.classList.remove("hidden");
+  } else {
+    badge2.classList.add("hidden");
+  }
+
+  if (allData.data[id - 1].assignee) {
+    assignee.innerText = allData.data[id - 1].assignee;
+  } else {
+    assignee.innerText = "None";
+  }
+  const modifiedDate = new Date(allData.data[id - 1].createdAt).toLocaleDateString("en-US");
+  create_date.innerText = modifiedDate;
+  title.innerText = allData.data[id - 1].title;
+  statuss.innerText = allData.data[id - 1].status;
+  description.innerText = allData.data[id - 1].description;
+  priority.innerText = allData.data[id - 1].priority;
+  if (allData.data[id - 1].priority == "low") {
+    priority.classList.add("low-highlight");
+  } else if (allData.data[id - 1].priority == "medium") {
+    priority.classList.add("secondary-highlight");
+  } else if (allData.data[id - 1].priority == "high") {
+    priority.classList.add("primary-highlight");
+  }
+  if (allData.data[id - 1].status == "open") {
+    statuss.classList.add("bg-green-200", "text-green-500");
+  } else {
+    statuss.classList.add("bg-purple-200", "text-purple-500");
+  }
+};
+const closeModal = () => {
+  const modal = document.getElementById("detail-modal");
+  if (modal) {
+    modal.classList.remove("flex");
+    modal.classList.add("hidden");
+  }
+};
 const showItem = (card) => {
   const cardContainer = document.getElementById("card-container");
 
-  const newCard = `${card.status === "closed" ? `<div class="flex flex-col border-t-4  border-t-purple-500 shadow-md rounded-xl font-medium w-full bg-white">` : `<div class="flex flex-col border-t-4  border-t-[#00A96E] shadow-md rounded-xl font-medium w-full bg-white">`}
+  const newCard = `${card.status === "closed" ? `<div onClick='openDetailModal(${card.id})' class="cursor-pointer hover:shadow-purple-400 flex flex-col border-t-4  border-t-purple-500 shadow-md rounded-xl font-medium w-full bg-white">` : `<div onClick='openDetailModal(${card.id})' class="flex flex-col cursor-pointer hover:shadow-green-400 border-t-4  border-t-[#00A96E] shadow-md rounded-xl font-medium w-full bg-white">`}
       
 
         <div class="p-4 space-y-[8px]">
