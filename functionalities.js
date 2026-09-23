@@ -129,15 +129,23 @@ const openDetailModal = (id) => {
   priority.innerText = allData.data[id - 1].priority;
   if (allData.data[id - 1].priority == "low") {
     priority.classList.add("low-highlight");
+    priority.classList.remove("primary-highlight");
+    priority.classList.remove("secondary-highlight");
   } else if (allData.data[id - 1].priority == "medium") {
     priority.classList.add("secondary-highlight");
+    priority.classList.remove("low-highlight");
+    priority.classList.remove("primary-highlight");
   } else if (allData.data[id - 1].priority == "high") {
     priority.classList.add("primary-highlight");
+    priority.classList.remove("low-highlight");
+    priority.classList.remove("secondary-highlight");
   }
   if (allData.data[id - 1].status == "open") {
+    statuss.classList.remove("bg-purple-200", "text-purple-500");
     statuss.classList.add("bg-green-200", "text-green-500");
   } else {
     statuss.classList.add("bg-purple-200", "text-purple-500");
+    statuss.classList.remove("bg-green-200", "text-green-500");
   }
 };
 const closeModal = () => {
@@ -156,14 +164,14 @@ const showItem = (card) => {
         <div class="p-4 space-y-[8px]">
             <div class="flex justify-between ">${
               card.priority === "low"
-                ? `<img class="self-center" src="./assets/closed-status.png"><button class="border border-transparent h-[24px] w-[80px] low-highlight rounded-full text-[12px] font-medium" >
+                ? `<img class="self-center" src="${card.status === "open" ? `./assets/Open-Status.png` : `./assets/closed-Status.png`}"><button class="border border-transparent h-[24px] w-[80px] low-highlight rounded-full text-[12px] font-medium" >
             ${card.priority}
           </button>`
                 : card.priority === "medium"
-                  ? `<img class="self-center" src="./assets/Open-Status.png"><button class="border border-transparent h-[24px] w-[80px] secondary-highlight rounded-full text-[12px] font-medium" >
+                  ? `<img class="self-center" src="${card.status === "open" ? `./assets/Open-Status.png` : `./assets/closed-Status.png`}"><button class="border border-transparent h-[24px] w-[80px] secondary-highlight rounded-full text-[12px] font-medium" >
             ${card.priority}
           </button>`
-                  : `<img class="self-center" src="./assets/Open-Status.png"><button class="border border-transparent h-[24px] w-[80px] primary-highlight rounded-full text-[12px] font-medium" >
+                  : `<img class="self-center" src="${card.status === "open" ? `./assets/Open-Status.png` : `./assets/closed-Status.png`}"><button class="border border-transparent h-[24px] w-[80px] primary-highlight rounded-full text-[12px] font-medium" >
             ${card.priority}
           </button>`
             }
